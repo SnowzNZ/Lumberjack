@@ -1,0 +1,4 @@
+name: Lumberjack
+version: '1.0'
+main: me.snowznz.lumberjack.Lumberjack
+api-version: '1.20'
