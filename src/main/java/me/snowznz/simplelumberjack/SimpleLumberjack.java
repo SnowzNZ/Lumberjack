@@ -20,7 +20,7 @@ public class SimpleLumberjack extends JavaPlugin implements Listener {
 
     @Override
     public void onEnable() {
-        // Setup config                         ticks
+        // Setup config
         config.addDefault("block-break-duration", 2);
 //        config.addDefault("wooden-axe-duration", 2);
 //        config.addDefault("stone-axe-duration", 2);
@@ -85,10 +85,10 @@ public class SimpleLumberjack extends JavaPlugin implements Listener {
 
         // Iterate over the neighboring blocks within a 1-block radius
         for (int offsetX = -1; offsetX <= 1; offsetX++) {
-            for (int offsetY = -1; offsetY <= 1; offsetY++) {
+            for (int offsetY = 0; offsetY <= 1; offsetY++) {
                 for (int offsetZ = -1; offsetZ <= 1; offsetZ++) {
                     // Skip the central block and blocks below
-                    if ((offsetX == 0 && offsetY == 0 && offsetZ == 0) || offsetY == -1) {
+                    if ((offsetX == 0 && offsetY == 0 && offsetZ == 0)) {
                         continue;
                     }
 
