@@ -1,4 +1,7 @@
 name: SimpleLumberjack
-version: '1.0'
+version: '0.1'
+author: SnowzNZ
 main: me.snowznz.simplelumberjack.SimpleLumberjack
-api-version: '1.20'
+api-version: '1.20.1'
+website: "https://github.com/SnowzNZ/SimpleLumberjack"
+description: A Simple plugin that lets you cuts down trees like a Lumberjack.

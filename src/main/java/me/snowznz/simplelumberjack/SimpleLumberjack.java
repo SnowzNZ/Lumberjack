@@ -20,8 +20,14 @@ public class SimpleLumberjack extends JavaPlugin implements Listener {
 
     @Override
     public void onEnable() {
-        // Setup config
+        // Setup config                         ticks
         config.addDefault("block-break-duration", 2);
+//        config.addDefault("wooden-axe-duration", 2);
+//        config.addDefault("stone-axe-duration", 2);
+//        config.addDefault("iron-axe-duration", 2);
+//        config.addDefault("gold-axe-duration", 2);
+//        config.addDefault("diamond-axe-duration", 2);
+//        config.addDefault("netherite-axe-duration", 2);
 
         config.options().copyDefaults(true);
         saveConfig();
