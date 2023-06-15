@@ -19,7 +19,13 @@ public class SimpleLumberjack extends JavaPlugin implements Listener {
     @Override
     public void onEnable() {
         config = getConfig();
-        config.addDefault("block-break-duration", 2);
+        config.addDefault("fist-break-speed", 7);
+        config.addDefault("wooden-axe-break-speed", 6);
+        config.addDefault("stone-axe-break-speed", 5);
+        config.addDefault("iron-axe-break-speed", 4);
+        config.addDefault("diamond-axe-break-speed", 3);
+        config.addDefault("netherite-axe-break-speed", 2);
+        config.addDefault("golden-axe-break-speed", 1);
         config.options().copyDefaults(true);
         saveConfig();
 
@@ -30,9 +36,23 @@ public class SimpleLumberjack extends JavaPlugin implements Listener {
         return material.toString().endsWith("_LOG");
     }
 
+    private int getBreakSpeed(Material axeType) {
+        return switch (axeType) {
+            case WOODEN_AXE -> config.getInt("wooden-axe-break-speed", 6);
+            case STONE_AXE -> config.getInt("stone-axe-break-speed", 5);
+            case IRON_AXE -> config.getInt("iron-axe-break-speed", 4);
+            case DIAMOND_AXE -> config.getInt("diamond-axe-break-speed", 3);
+            case NETHERITE_AXE -> config.getInt("netherite-axe-break-speed", 2);
+            case GOLDEN_AXE -> config.getInt("golden-axe-break-speed", 1);
+            default -> config.getInt("fist-break-speed", 7);
+        };
+    }
+
     @EventHandler
     public void onBlockBreak(BlockBreakEvent event) {
         Block blockBroken = event.getBlock();
+        Material axeType = event.getPlayer().getInventory().getItemInMainHand().getType();
+        int breakSpeed = getBreakSpeed(axeType);
         if (isLogBlock(blockBroken.getType())) {
             List<Block> surroundingLogs = getSurroundingLogs(blockBroken.getLocation());
 
@@ -44,12 +64,12 @@ public class SimpleLumberjack extends JavaPlugin implements Listener {
                         getServer().getPluginManager().callEvent(breakEvent);
 
                         if (!breakEvent.isCancelled()) {
-                            event.getPlayer().sendBlockDamage(block.getLocation(), 1);
+//                            event.getPlayer().sendBlockDamage(block.getLocation(), 1);
                             block.breakNaturally();
                         }
                     }
                 }
-            }.runTaskLater(this, config.getInt("block-break-duration"));
+            }.runTaskLater(this, breakSpeed);
         }
     }
 
